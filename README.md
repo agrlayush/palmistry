@@ -1,6 +1,7 @@
 # Fortune On Your Hand: View-Invariant Machine Palmistry
 ## Summary
-Our *Palmistry principal lines detection software* is implemented by 4 steps below. Our main challenge was to read the principal lines on a palm regardless of the **view direction** and **illumination**:   
+Our *Palmistry principal lines detection software* is implemented by 4 steps below. 
+Our main challenge was to read the principal lines on a palm regardless of the **view direction** and **illumination**:   
 1) Warping a tilted palm image  
 2) Detecting principal lines on a palm  
 3) Classifying the lines  
@@ -33,8 +34,8 @@ In order to install the requirements, run `pip install -r ./code/requirements.tx
 ## Line Segment implementation
 Update: 22.12.03 21:57
 - Assumption
-  - line이 image의 테두리까지 가는 경우가 없음 (이 경우 scikit의 skeletonize가 종종 안됨. skeletonize 되더라도 grouping 알고리즘 조금 수정 필요)
-  - 선들이 교차하는 점은 최대 하나 (test case에 따랐음. 약간의 추가 구현으로 처리 가능하기는 함)
+  - The line never reaches the border of the image (in this case, scikit's skeletonize often does not work. Even if it is skeletonized, the grouping algorithm needs to be slightly modified)
+  - There can be at most one point where the lines intersect (according to the test case. It can be handled with some additional implementation)
 
 - line grouping
   - return value : list of lines, each lines are also a list of pixels
@@ -42,15 +43,15 @@ Update: 22.12.03 21:57
   example : [ [[1, 2], [2, 3]], [[10, 11], [11, 11]] ]
   ```
   
-  - explanation of implementation
-    1. 전체 픽셀에 대해 둘레 8픽셀 중 0이 아닌 값을 count
-    2. count 결과물은 0: 선 위에 없음, 1: 선의 끝, 2: 선의 중간, 3: 선의 교차점으로 구분됨
-    3. 선의 끝인 pixel에서 시작해서 주변 8픽셀을 탐색, count가 0이 아니고 방문하지 않은 pixel을 따라감
-    4. 가다보면 count가 1이나 3인 pixel에 도달
-    5. 1인 pixel이면 line을 하나 찾은 것이므로 저장하고 역방향 탐색이 되지 않도록 for문에서 제외. 3인 pixel은 line을 따로 저장해놨다가 추후 조치
-    6. 3으로 끝난 line들끼리 이을 수 있나 확인: 시작점, 끝점 차이 확인해서 방향이 반대인 모든 조합들을 이어서 line에 저장
-    7. 저장한 line들을 return
+  explanation of implementation
+     1. Count non-zero values among the 8 pixels around all pixels.
+     2. The count result is divided into 0: not on the line, 1: end of the line, 2: middle of the line, 3: intersection of the line.
+     3. Starting from the pixel at the end of the line, search the surrounding 8 pixels, following pixels whose count is not 0 and that have not been visited.
+     4. As you proceed, you will reach a pixel with a count of 1 or 3.
+     5. If the pixel is 1, one line has been found, so save it and exclude it from the for statement to prevent reverse search. For the 3 pixels, the line should be saved separately for later action.
+     6. Check whether lines ending in 3 can be connected: Check the difference between the start and end points and save all combinations with opposite directions in the line.
+     7. Return the saved lines
     
 ## Issues
-  - skeletonize가 붙어있지 않던 선을 붙이는 경우 있음 (1 case, 선 하나가 약간 길게 나오게 됨) -> 추가 test 필요
-  - 끊어진 라인 처리가 애매함 : 현재는 무시하고 진행한 상태, grouping된 선들 gradient 계산하면 할 수야 있기는 한데 잘못하면 이상한 선들끼리 이어질 수 있음. 이런 케이스를 숨기는게 좋아보이긴 함...
+  - There are cases where skeletonize attaches a line that was not attached (1 case, one line appears slightly long) -> Additional testing is required
+   - Processing of broken lines is ambiguous: Currently, it is ignored and proceeded with. It can be done by calculating the gradient of the grouped lines, but if done incorrectly, strange lines may be connected to each other. It seems like a good idea to hide cases like this...
