@@ -6,3 +6,5 @@ venv
 /data
 /results
 /data_failed
+/code/results
+*.pyc
