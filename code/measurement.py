@@ -37,6 +37,7 @@ def measure(path_to_warped_image_mini, lines):
         life_line = lines[2]
 
         heart_line_points = [tuple(reversed(l[:2])) for l in heart_line]
+        print("heart line length:", len(heart_line_points))
         heart_line_tip = heart_line_points[0]
         heart_content_1 = 'Love line governs all matters of the heart, including romance, friendship, and commitment.'
         if heart_line_tip[0] < heart_thres_x:
@@ -46,6 +47,7 @@ def measure(path_to_warped_image_mini, lines):
         draw.line(heart_line_points, fill="red", width=width)
 
         head_line_points = [tuple(reversed(l[:2])) for l in head_line]
+        print("Head line length:", len(head_line_points))
         head_line_tip = head_line_points[-1]
         head_content_1 = 'Head line tells us about our intellectual curiosities and pursuits.'
         if head_line_tip[0] > head_thres_x:
@@ -55,6 +57,7 @@ def measure(path_to_warped_image_mini, lines):
         draw.line(head_line_points, fill="green", width=width)
 
         life_line_points = [tuple(reversed(l[:2])) for l in life_line]
+        print("life line length:", len(life_line_points))
         life_line_tip = life_line_points[-1]
         life_content_1 = 'Life line reveals your experiences, vitality, and zest. Be careful, it has nothing to do with how long you will live!'
         if life_line_tip[1] > life_thres_y:
