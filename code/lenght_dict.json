@@ -1,0 +1,53 @@
+{
+    "heart_line":{
+        "2": "Reserved emotionally, pragmatic.",
+        "2.5": "Balanced emotions, practical.",
+        "3": "Affectionate, empathetic.",
+        "3.5": "Romantic, idealistic.",
+        "4": "Expressive, compassionate.",
+        "4.5": "Emotional, sensitive.",
+        "5": "Highly empathetic, deeply connected.",
+        "5.5": "Intense emotions, passionate.",
+        "6": "Sensual, expressive nature.",
+        "6.5": "Artistic, emotionally sensitive.",
+        "7": "Compassionate, nurturing.",
+        "7.5": "Empathetic healer, deeply caring.",
+        "8": "Strong emotional intelligence, intuitive.",
+        "8.5": "Highly empathetic, spiritually connected.",
+        "9": "Profound emotional depth, intuitive healer."
+    },
+    "head_line":{
+        "2": "Practical thinker, action-oriented.",
+        "2.5": "Analytical, logical.",
+        "3": "Balanced between practicality and imagination.",
+        "3.5": "Creative, imaginative.",
+        "4": "Intuitive, innovative.",
+        "4.5": "Intellectual, deep thinker.",
+        "5": "Strategic, philosophical.",
+        "5.5": "Strategic thinker, forward-looking.",
+        "6": "Philosophical, wise.",
+        "6.5": "Visionary, deep understanding.",
+        "7": "Analytical, critical thinker.",
+        "7.5": "Inventive, problem solver.",
+        "8": "Highly intellectual, innovative.",
+        "8.5": "Genius-level intellect, visionary.",
+        "9": "Deeply insightful, profound wisdom."
+    },
+    "life_line":{
+        "2": "Energetic, adventurous",
+        "2.5": "Stable, reliable",
+        "3": "Balanced independence and dependence",
+        "3.5": "Strong vitality, resilient",
+        "4": "Health-conscious, cautious",
+        "4.5": "Grounded, long life expectancy",
+        "5": "Deeply rooted, stable life path",
+        "5.5": "Grounded, practical",
+        "6": "Stable, secure",
+        "6.5": "Resilient, adaptable",
+        "7": "Longevity, strong vitality",
+        "7.5": "Harmonious, balanced life",
+        "8": "Deeply rooted, strong foundation",
+        "8.5": "Protector, guardian of family",
+        "9": "Guardian of traditions, legacy"
+    }
+}
