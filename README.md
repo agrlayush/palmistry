@@ -27,6 +27,11 @@ In order to install the requirements, run `pip install -r ./code/requirements.tx
 > python ./code/read_palm.py --input [filename].[jpg, heic]
 ```
 
+## To run the Streamlit Application
+```bash
+> streamlit run app.py
+```
+
 ## Results
 <img width="1371" alt="standard" src="https://user-images.githubusercontent.com/81272473/208797334-9cf56f18-01b1-46e5-9bab-5a38a696d05f.png">
 <img width="1361" alt="tilted" src="https://user-images.githubusercontent.com/81272473/208797357-fe007daf-0d24-48b0-80af-21d79b64db4a.png">

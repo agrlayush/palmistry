@@ -17,3 +17,8 @@ In order to install the requirements, run `pip install -r requirements.txt`.
 ```bash
 $> python read_palm.py --input [input_file_name.jpg]
 ```
+
+## To run the Streamlit Application
+```bash
+> streamlit run app.py
+```
