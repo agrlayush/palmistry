@@ -29,7 +29,7 @@ In order to install the requirements, run `pip install -r ./code/requirements.tx
 
 ## To run the Streamlit Application
 ```bash
-> streamlit run app.py
+streamlit run app.py
 ```
 
 ## Results

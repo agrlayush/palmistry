@@ -15,10 +15,10 @@ In order to install the requirements, run `pip install -r requirements.txt`.
 1. Before running the codes, **a palm image for input(.heic or .jpg)** should be prepared in the `inputs` directory. We provided four sample inputs.
 2. Run `read_palm.py` by the command below. After running the code, result files will be saved in the `results` directory.
 ```bash
-$> python read_palm.py --input [input_file_name.jpg]
+$ python read_palm.py --input [input_file_name.jpg]
 ```
 
 ## To run the Streamlit Application
 ```bash
-> streamlit run app.py
+$ streamlit run app.py
 ```
