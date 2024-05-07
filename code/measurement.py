@@ -26,7 +26,7 @@ def measure(path_to_warped_image_mini, lines):
         life_thres_y = image_height * (one + (zero - one) / 3)
 
     im = Image.open(path_to_warped_image_mini)
-    width = 3
+    width = 2
     if (None in lines) or (len(lines) < 3):
         return None, None
     else:
@@ -71,4 +71,5 @@ def measure(path_to_warped_image_mini, lines):
         # draw.line([(0, life_thres_y), (image_width, life_thres_y)], fill="blue")
 
         contents = [heart_content_1, heart_content_2, head_content_1, head_content_2, life_content_1, life_content_2]
-        return im, contents
+        length = [len(heart_line_points), len(head_line_points), len(life_line_points)]
+        return im, contents, length

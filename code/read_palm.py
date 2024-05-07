@@ -7,7 +7,7 @@ from detection import *
 from classification import *
 from measurement import *
 
-def main(input):
+def main(input, method = "direct"):
     path_to_input_image = 'input/{}'.format(input)
 
     results_dir = './results'
@@ -43,10 +43,11 @@ def main(input):
         lines = classify(path_to_palmline_image)
 
         # 4. Length measurement
-        im, contents = measure(path_to_warped_image_mini, lines)
+        im, contents, length = measure(path_to_warped_image_mini, lines)
 
         # 5. Save result
-        save_result(im, contents, resize_value, path_to_result)
+        save_result(im, contents, resize_value, path_to_result, method)
+        return length
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
