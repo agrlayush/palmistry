@@ -10,12 +10,12 @@ file_location = "input/"
 st.markdown("<h2 style='text-align: center'>Capture a Photo", unsafe_allow_html=True)
 st.header('', divider='rainbow')
 picture = st.camera_input("Take a picture of you palm:")
-filename = "ayush.jpg"
+filename = "hand.jpg"
 if picture:
     with open (file_location + filename,'wb') as file:
           file.write(picture.getbuffer())
 
-    length = main(filename)
+    length = main(filename, "streamlit")
 
     if length == None:
         st.write("Palm lines not properly detected! Please use another palm image.")

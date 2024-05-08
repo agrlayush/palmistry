@@ -18,7 +18,7 @@ The codes are written based on Python 3.7.6. These are the requirements for runn
 - pillow-heif
 - mediapipe
 
-In order to install the requirements, run `pip install -r ./code/requirements.txt`.
+In order to install the requirements, run `pip install -r ./code/requirements.txt`
 
 ## Run
 1. Before running the codes, **a palm image for input(.heic or .jpg)** should be prepared in the `./code/inputs` directory. We provided four sample inputs.

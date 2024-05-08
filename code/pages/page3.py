@@ -5,9 +5,9 @@ from PIL import Image
 import boto3
 import polly
 
-client = boto3.client(service_name='bedrock-runtime')
+client = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 
-filename = "ayush.jpg"
+filename = "hand.jpg"
 length = main(filename, "streamlit")
 heart_line = length[0]/10
 head_line = length[1]/10
