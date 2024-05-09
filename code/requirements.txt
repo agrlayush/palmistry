@@ -5,4 +5,4 @@ opencv-python==4.6.0.66
 pillow-heif
 mediapipe==0.8.11
 streamlit
-boto3==1.34.98
+boto3
