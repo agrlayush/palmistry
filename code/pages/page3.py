@@ -4,6 +4,17 @@ import bedrock
 from PIL import Image
 import boto3
 import polly
+st.set_page_config(initial_sidebar_state="collapsed")
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 client = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 
@@ -61,10 +72,14 @@ with st.container():
 	# st.audio(audio, format="audio/mp3", loop=False)
 	
 	
-	st.write(prediction)
+	st.subheader(prediction)
+	
+
       
 	# if st.button("Restart", type="primary"):
-	st.page_link("app.py")
-
-	st.write("* Note: This program is just for fun! Please take the result with a light heart.")
+	col1, col2, col3 = st.columns([3, 1, 2])
+	if col2.button("Restart", type="primary"):
+            st.switch_page("app.py")
+    # st.page_link("app.py")
+st.write("* Note: This program is just for fun! Please take the result with a light heart.")
 

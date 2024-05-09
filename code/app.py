@@ -1,4 +1,16 @@
 import streamlit as st
+
+st.set_page_config(initial_sidebar_state="collapsed")
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
 # st.set_page_config(layout="wide")
 st.markdown("<h2 style='text-align: center'>Welcome to AI Astrologer</h2>", unsafe_allow_html=True)
 st.header('', divider='rainbow')
@@ -11,5 +23,5 @@ col1, col2, col3 = st.columns([1, 1, 1])
 # col2.button("Open Camera To Start", type="primary")
 
 # col2.page_link("pages/page2.py", label="Open Camera to Start", use_container_width=True)
-if st.button("Open Camera to Start", type="primary"):
+if col2.button("Open Camera to Start", type="primary"):
     st.switch_page("pages/page2.py")

@@ -4,6 +4,17 @@ from read_palm import main
 import cv2
 import numpy as np
 file_location = "input/"
+st.set_page_config(initial_sidebar_state="collapsed")
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
+    }
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 
 # st.set_page_config(layout="wide")
@@ -16,12 +27,12 @@ if picture:
           file.write(picture.getbuffer())
 
     length = main(filename, "streamlit")
-
+    col1, col2, col3 = st.columns([1, 1, 1])
     if length == None:
         st.write("Palm lines not properly detected! Please use another palm image.")
     else:
         # st.write(length)
-        if st.button("Send to AI Astrologer", type="primary"):
+        if col2.button("Send to AI Astrologer", type="primary"):
             st.switch_page("pages/page3.py")
         # st.page_link("pages/page3.py", label="Send to AI Astrologer", use_container_width=True)
         # st.link_button("Send to AI Astrologer", "pages/page3.py")
@@ -50,6 +61,7 @@ if picture:
 
 #For Upload Files
 # img_file_buffer = st.file_uploader("Upload an image of you palm", type=["png", "jpg", "jpeg"])
+
 
 
 
