@@ -2,6 +2,9 @@ from PIL import Image, ImageDraw
 import cv2
 import mediapipe as mp
 
+def print_error():
+    print('Palm lines not properly detected! Please use another palm image.')
+
 def measure(path_to_warped_image_mini, lines):
     heart_thres_x = 0
     head_thres_x = 0
@@ -13,6 +16,10 @@ def measure(path_to_warped_image_mini, lines):
         image_height, image_width, _ = image.shape
 
         results = hands.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        if results.multi_hand_landmarks is None:
+            print_error()
+            return None, None, None
+        
         hand_landmarks = results.multi_hand_landmarks[0]
 
         zero = hand_landmarks.landmark[mp_hands.HandLandmark(0).value].y
@@ -73,3 +80,4 @@ def measure(path_to_warped_image_mini, lines):
         contents = [heart_content_1, heart_content_2, head_content_1, head_content_2, life_content_1, life_content_2]
         length = [len(heart_line_points), len(head_line_points), len(life_line_points)]
         return im, contents, length
+    

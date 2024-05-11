@@ -8,3 +8,4 @@ venv
 /data_failed
 /code/results
 *.pyc
+code/input/hand.jpg
