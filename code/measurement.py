@@ -79,5 +79,7 @@ def measure(path_to_warped_image_mini, lines):
 
         contents = [heart_content_1, heart_content_2, head_content_1, head_content_2, life_content_1, life_content_2]
         length = [len(heart_line_points), len(head_line_points), len(life_line_points)]
+        if im is None or contents is None or length is None:
+            print_error()
+            return None, None, None
         return im, contents, length
-    

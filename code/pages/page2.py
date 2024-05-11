@@ -1,5 +1,6 @@
 import streamlit as st
 from read_palm import main
+import streamlit.components.v1 as components
 
 import cv2
 import numpy as np
@@ -62,6 +63,31 @@ if picture:
 #For Upload Files
 # img_file_buffer = st.file_uploader("Upload an image of you palm", type=["png", "jpg", "jpeg"])
 
-
-
-
+components.html(
+    """
+<script>
+const doc = window.parent.document;
+buttons = Array.from(doc.querySelectorAll('button'));
+console.log(buttons)
+const take_photo_button = buttons.find(el => el.innerText === "Take Photo");
+const clear_photo_button = buttons.find(el => el.innerText === "Clear photo");
+const send_button = buttons.find(el => el.innerText === "Send to AI Astrologer");
+doc.addEventListener('keydown', function(e) {
+    console.log(e.keyCode)
+    switch (e.keyCode) {
+        case 32: // (32 = space)
+            take_photo_button.click();
+            break;
+        case 81: // (81 = q)
+            clear_photo_button.click();
+            break;
+        case 13: // (13 = enter)
+            send_button.click();
+            break
+    }
+});
+</script>
+""",
+    height=0,
+    width=0,
+)
