@@ -56,8 +56,6 @@ st.header('', divider='rainbow')
 
 if 'pandit' not in st.session_state:
 	st.session_state.pandit = 'false'
-	st.session_state.audio_video = 'false'
-	st.session_state.video_bytes = None
 
 def get_audio_duration(audio_file):
 	audio_duration = subprocess.check_output(["ffprobe", "-i", "eng.mp3", "-show_entries", "format=duration"]).decode().split("=")[1]
@@ -91,7 +89,7 @@ def generate_video():
 		video_file = open('../../Wav2Lip/results/result_voice.mp4', 'rb')
 		video_bytes = video_file.read()
 		#if 'is_video_placeholder' in st.session_state:
-		st.session_state.video_bytes = video_bytes
+		st.session_state.video_field.video(video_bytes)
 	except subprocess.CalledProcessError as e:
 		print("Error executing FFmpeg command:", e)
 
@@ -127,51 +125,38 @@ def generate_audio_video():
 
 # st. set_page_config(layout="wide")
 with st.container():
+	
+
+        # //call bedrock
+        # get predictions
+        # generate audio
+        # generate Video
+        # redirect to next page
+        # st.page_link("pages/page2.py", See Pre)
 
 	st.session_state.fortune_text = prediction
-	if st.session_state.audio_video == 'false':
-		video_file = open('../../astro-placeholder.mov', 'rb')
-		video_bytes = video_file.read()
-		#if 'is_video_placeholder' in st.session_state:
-		placeholder = st.empty()
-		st.session_state.placeholder_video = placeholder
-		st.session_state.placeholder_video.video(video_bytes, loop=True, autoplay=True)
-		generate_audio_video()
-		st.session_state.placeholder_video.empty()
-		col1, col2 = st.columns(2)
-		with col1:
-			image = Image.open('results/result.jpg')
-			col1.image(image, caption='', use_column_width=None)
-		with col2:
-			st.video(st.session_state.video_bytes)
-		st.subheader(prediction)
+	col1, col2 = st.columns(2)
+	with  col1:
+		image = Image.open('results/result.jpg')
+		col1.image(image, caption='', use_column_width=None)
+	with col2:
+		if st.session_state.pandit == 'false':
+			video_file = st.empty()
+			st.session_state.video_field = video_file
+	generate_audio_video()
+	
+	# st.audio(audio, format="audio/mp3", loop=False)
+	
+	
+	st.subheader(prediction)
+	
 
-
+      
 	# if st.button("Restart", type="primary"):
-	#col1, col2, col3 = st.columns([3, 1, 2])
-	#if col2.button("Restart", type="primary"):
-    #        st.switch_page("app.py")
+	col1, col2, col3 = st.columns([3, 1, 2])
+	if col2.button("Restart", type="primary"):
+            st.switch_page("app.py")
     # st.page_link("app.py")
 st.write("* Note: This program is just for fun! Please take the result with a light heart.")
 
 
-components.html(
-    """
-<script>
-const doc = window.parent.document;
-buttons = Array.from(doc.querySelectorAll('button'));
-console.log(buttons)
-const next_button = buttons.find(el => el.innerText === "Restart");
-doc.addEventListener('keydown', function(e) {
-    console.log(e.keyCode)
-    switch (e.keyCode) {
-        case 13: // (13 = enter)
-            next_button.click();
-            break
-    }
-});
-</script>
-""",
-    height=0,
-    width=0,
-)

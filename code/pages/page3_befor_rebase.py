@@ -155,23 +155,3 @@ with st.container():
 st.write("* Note: This program is just for fun! Please take the result with a light heart.")
 
 
-components.html(
-    """
-<script>
-const doc = window.parent.document;
-buttons = Array.from(doc.querySelectorAll('button'));
-console.log(buttons)
-const next_button = buttons.find(el => el.innerText === "Restart");
-doc.addEventListener('keydown', function(e) {
-    console.log(e.keyCode)
-    switch (e.keyCode) {
-        case 13: // (13 = enter)
-            next_button.click();
-            break
-    }
-});
-</script>
-""",
-    height=0,
-    width=0,
-)
