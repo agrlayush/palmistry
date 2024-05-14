@@ -6,19 +6,19 @@ import boto3
 import subprocess
 import os
 from datetime import datetime
-
+import streamlit.components.v1 as components
 
 
 st.set_page_config(initial_sidebar_state="collapsed")
 st.markdown(
-    """
+	"""
 <style>
     [data-testid="collapsedControl"] {
         display: none
     }
 </style>
 """,
-    unsafe_allow_html=True,
+	unsafe_allow_html=True,
 )
 
 client = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
@@ -47,6 +47,10 @@ Generate the Prediction in 75 words. Skip the preamble. Do not provide the lengt
 '''.format(heart_line=heart_line, head_line=head_line, life_line=life_line)
 # f"You are a Palmist fortune teller and after looking at the human hand you have found the length of heart line as {heart_line} cm, length of head line as {head_line} cm and length of life line as {life_line} cm. You will generate prediction for the human hand.
 print("prompt", prompt)
+if 'audio_video' not in st.session_state:
+    st.session_state.audio_video = 'false'
+
+#if st.session_state.audio_video == 'true':
 response = bedrock.invoke_claude_3_with_text(prompt)
 prediction = response["content"][0]["text"]
 
@@ -56,7 +60,7 @@ st.header('', divider='rainbow')
 
 if 'pandit' not in st.session_state:
 	st.session_state.pandit = 'false'
-	st.session_state.audio_video = 'false'
+	#st.session_state.audio_video = 'false'
 	st.session_state.video_bytes = None
 
 def get_audio_duration(audio_file):
@@ -123,13 +127,12 @@ def generate_audio_video():
 	print("Total time in seconds " , (end_time - start_time).total_seconds())
 	#st.session_state.audio_field.text_input("Audio", "")
 	#st.session_state.video_field.text_input("Video", "")
-	st.session_state.audio_video = 'true'
+	st.session_state.audio_video = 'false'
 
-# st. set_page_config(layout="wide")
+
 with st.container():
-
 	st.session_state.fortune_text = prediction
-	if st.session_state.audio_video == 'false':
+	if st.session_state.audio_video == 'true':
 		video_file = open('../../astro-placeholder.mov', 'rb')
 		video_bytes = video_file.read()
 		#if 'is_video_placeholder' in st.session_state:
@@ -146,17 +149,21 @@ with st.container():
 			st.video(st.session_state.video_bytes)
 		st.subheader(prediction)
 
+	col1, col2, col3 = st.columns([3, 1, 2])
+		
+	url = 'https://d1qy0wt73w2rn1.cloudfront.net/'
 
-	# if st.button("Restart", type="primary"):
-	#col1, col2, col3 = st.columns([3, 1, 2])
-	#if col2.button("Restart", type="primary"):
-    #        st.switch_page("app.py")
-    # st.page_link("app.py")
-st.write("* Note: This program is just for fun! Please take the result with a light heart.")
+	st.markdown(f'''
+	<a target="_self" href={url}><button style="background-color:red;">Restart</button></a>
+	''',
+	unsafe_allow_html=True)
+#	if col2.button("Restart", type="primary"):
+#		st.switch_page("app.py")
+	st.write("* Note: This program is just for fun! Please take the result with a light heart.")
 
 
 components.html(
-    """
+	"""
 <script>
 const doc = window.parent.document;
 buttons = Array.from(doc.querySelectorAll('button'));
@@ -172,6 +179,6 @@ doc.addEventListener('keydown', function(e) {
 });
 </script>
 """,
-    height=0,
-    width=0,
+	height=0,
+	width=0,
 )
